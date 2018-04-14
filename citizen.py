@@ -1,9 +1,9 @@
 import math
 
 class Citizen:
-    def __init__(self, economicFactor, socialFactor):
-        self.economicFactor = economicFactor
-        self.socialFactor = socialFactor
+    def __init__(self, economicPosition, socialPosition):
+        self.economicPosition = economicPosition
+        self.socialPosition = socialPosition
 
     def vote(self, politicians):
         vote = (0, None)
@@ -16,8 +16,8 @@ class Citizen:
         return vote[1]
 
     def _score(self, politician):
-        economicDifference = politician.publicEconomicFactor - self.economicFactor
-        socialDifference = politician.publicSocialFactor - self.socialFactor
+        economicDifference = politician.publicEconomicPosition - self.economicPosition
+        socialDifference = politician.publicSocialPosition - self.socialPosition
 
         difference = math.sqrt(economicDifference**2 + socialDifference**2)
 
