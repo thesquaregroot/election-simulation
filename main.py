@@ -2,6 +2,7 @@
 from campaign import *
 from politician import *
 from citizen import *
+from visualizer import *
 
 import random
 
@@ -24,15 +25,18 @@ def printPoliticianStates(campaign):
 if __name__ == "__main__":
     campaign = Campaign()
     campaign.politicians = [Politician('P1', 0.0, 0.0), FollowTheCenterPolitician('P2', 0.5, 0.5), FollowTheCenterPolitician('P3', -0.1, -0.5)]
-    for i in range(1000):
+    for i in range(100000):
         economicPosition = random.normalvariate(0.05, 0.1)
         socialPosition = random.normalvariate(0.00, 0.1)
         campaign.citizens.append(Citizen(economicPosition, socialPosition))
     campaign.duration = 5
     phase = 1
     printPoliticianStates(campaign)
+    visualizer = Visualizer(campaign)
     for results in campaign.simulate():
         printResults(campaign, results)
         printPoliticianStates(campaign)
+        visualizer.addResults(results)
         phase += 1
+    visualizer.waitUntilClosed()
 
